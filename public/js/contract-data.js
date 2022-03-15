@@ -13,10 +13,10 @@ const networks = {
 
 const contractData = {
 	mintingPrice: ethers.utils.parseEther('0.06'),
-	network: networks.rinkeby,
-	address: '0xE5B2Da0bD19274AF4d9Cc1B4101fCD915ce4ad5c',
+	network: networks.mainnet,
+	address: '0x148280a1395af6F430248c2E4B8063c69B7cA23E',
 	abi: [
-		'constructor(string,address,address)',
+		'constructor(string,string,address,address)',
 		'event Approval(address indexed,address indexed,uint256 indexed)',
 		'event ApprovalForAll(address indexed,address indexed,bool)',
 		'event NewOutsetDate(uint256 indexed,uint256)',
@@ -25,6 +25,7 @@ const contractData = {
 		'function MAX_TOKENS() view returns (uint256)',
 		'function MINTING_PRICE() view returns (uint256)',
 		'function PUBLIC_MINTING_START_DATE() view returns (uint256)',
+		'function RARITIES_REVEAL_DATE() view returns (uint256)',
 		'function approve(address,uint256)',
 		'function balanceOf(address) view returns (uint256)',
 		'function contractURI() view returns (string)',
@@ -43,7 +44,6 @@ const contractData = {
 		'function raritiesHaveBeenRevealed() view returns (bool)',
 		'function rarity(uint256) view returns (uint8)',
 		'function renounceOwnership()',
-		'function revealRarities(string)',
 		'function safeTransferFrom(address,address,uint256)',
 		'function safeTransferFrom(address,address,uint256,bytes)',
 		'function setApprovalForAll(address,bool)',
