@@ -35,13 +35,25 @@ const mint = async () => {
 // contract calls
 
 const callMintTwin = async () => {
-	return await contractWithSigner.mintTwin({
-		value: contractData.mintingPrice
-	})
+	let call
+	try {
+		call = await contractWithSigner.mintTwin({
+			value: contractData.mintingPrice
+		})
+	} catch (err) {
+		console.log(err)
+	}
+	return call
 }
 
-const callMintTwins = async (amount) => {
-	return await contractWithSigner.mintTwins(amount, {
-		value: contractData.mintingPrice.mul(amount)
-	})
+const callMintTwins = async (_amount) => {
+	let call
+	try {
+		call = await contractWithSigner.mintTwins(_amount, {
+			value: contractData.mintingPrice.mul(_amount)
+		})
+	} catch (err) {
+		bootstrapAlert(err.code, 'danger')
+	}
+	return call
 }

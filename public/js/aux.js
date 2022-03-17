@@ -8,9 +8,6 @@ const checkNotEmpty = (value) => {
 
 		window.location.reload()
 	}
-	// if (value == 7) {
-	// 	bootstrapAlert('danger', 'xd lol')
-	// }
 }
 
 const etherscanURL = (tx) => {
@@ -49,5 +46,3 @@ const txAlert = (tx) => {
 
 	alertPlaceholder.append(wrapper)
 }
-
-// bootstrapAlert('hola', 'success')
