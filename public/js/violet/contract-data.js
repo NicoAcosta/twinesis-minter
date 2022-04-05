@@ -13,8 +13,8 @@ const networks = {
 
 const contractData = {
 	mintingPrice: ethers.utils.parseEther('0.04'),
-	network: networks.rinkeby,
-	address: '0x992169E83Ed808dCECe6347c558BB3C8dFA29D1B',
+	network: networks.mainnet,
+	address: '0x6D27462859df2AA5eCCCBd14d68B9742FF48da91',
 	abi: [
 		'constructor(string,address,address)',
 		'event Approval(address indexed,address indexed,uint256 indexed)',
