@@ -6,11 +6,43 @@ const amount = () => {
 	return amount
 }
 
+const publicMintingTokensMinted = () => {}
+
+const verifySupply = async (_amount) => {
+	const MAX_TOKENS_TO_MINT = 66
+	console.log('MAX_TOKENS_TO_MINT', MAX_TOKENS_TO_MINT)
+
+	const publicMintingTokensMinted_ =
+		await contract.publicMintingTokensMinted()
+	const publicMintingTokensMinted = publicMintingTokensMinted_.toNumber()
+
+	console.log('publicMintingTokensMinted', publicMintingTokensMinted)
+
+	if (publicMintingTokensMinted >= MAX_TOKENS_TO_MINT) {
+		alert('Maximum Violet supply reached')
+		window.location.reload()
+	}
+
+	const tokensLeftToMint = MAX_TOKENS_TO_MINT - publicMintingTokensMinted
+	console.log('tokensLeftToMint', tokensLeftToMint)
+
+	if (_amount > tokensLeftToMint) {
+		alert(
+			`Cannot mint this amount of tokens. Tokens left to be minted: ${tokensLeftToMint}`
+		)
+		window.location.reload()
+	}
+}
+
 const mint = async () => {
+	const _amount = amount()
+	console.log('amount', _amount)
+
+	await verifySupply(_amount)
+
 	if (!signer) await connectWallet()
 
 	let tx
-	const _amount = amount()
 
 	if (_amount == 1) {
 		tx = await callMintViolet()
@@ -35,11 +67,14 @@ const mint = async () => {
 // contract calls
 
 const recipient = async () => {
+	let _recipient
 	if (tokenRecipient == null) {
-		return await signer.getAddress()
+		_recipient = await signer.getAddress()
 	} else {
-		return tokenRecipient.value
+		_recipient = ethers.utils.getAddress(tokenRecipient.value)
 	}
+	console.log('Recipient:', _recipient)
+	return _recipient
 }
 
 const callMintViolet = async () => {
